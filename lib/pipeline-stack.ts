@@ -50,7 +50,7 @@ export class PipelineStack extends cdk.Stack {
               hosts: [ `https://${props.openSearchDomainEndpoint}`],
               index: props.openSearchIndexName,
               index_type: "custom",
-              document_id: "${/title}", //TODO Set the doc Id dynamically 
+              document_id: "${/title}",
               action: "${getMetadata(\"opensearch_action\")}",
               document_version: "${getMetadata(\"document_version\")}",
               document_version_type: "external",

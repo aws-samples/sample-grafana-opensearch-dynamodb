@@ -105,11 +105,6 @@ export class OpenSearchStack extends cdk.Stack {
                 "es:ESHttpPut",
                 "es:ESHttpPost",
                 "es:DescribeDomain"
-                // "es:Describe*",
-                // "es:List*",
-                // "es:Get*",
-                // "es:ESHttp*",
-                // "es:Update*"
               ],
               resources: [
                 `arn:aws:es:${this.region}:${this.account}:domain/${props.openSearchDomainName}`,
@@ -142,7 +137,6 @@ export class OpenSearchStack extends cdk.Stack {
     });
       
     // Create OpenSearch Domain
-    //const existingDomain = opensearch.Domain.fromDomainEndpoint(this, 'ExistingDomain', 'https://search-movies-search-cyhyklhvpjvjcon5bafe4v5m2q.us-east-1.es.amazonaws.com');
     const openSearchDomain = new opensearch.Domain(this, 'OpenSearchDomain', {
       domainName: props.openSearchDomainName,
       version: opensearch.EngineVersion.OPENSEARCH_2_11,
@@ -168,7 +162,6 @@ export class OpenSearchStack extends cdk.Stack {
       enforceHttps: true,
       tlsSecurityPolicy: opensearch.TLSSecurityPolicy.TLS_1_2,
       fineGrainedAccessControl: {
-        // masterUserArn: pipelineRole.roleArn
         masterUserName: masterUserSecret.secretValueFromJson('username').unsafeUnwrap(),
         masterUserPassword: masterUserSecret.secretValueFromJson('password'),
       },
